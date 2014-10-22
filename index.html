@@ -1,0 +1,135 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/d3.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/d3.min.js"></script>
+	<script type="text/javascript" src="js/angulard3.js"></script>
+</head>
+<body>
+	<div ng-app="dataMaker" ng-controller="dataController">
+
+		<vertical-bar-chart
+			chart-data="myData"
+			id="vBarChart"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Quantity"
+		>
+		</vertical-bar-chart>
+
+		<horizontal-bar-chart
+			chart-data="myData"
+			id="hBarChart"
+			x="name"
+			y="value"
+			xlabel="Quantity"
+			ylabel="Items"
+		>
+		</horizontal-bar-chart>
+
+		<pie-chart
+			chart-data="myData"
+			id="pieChart"
+			x="name"
+			y="value"
+			show-legend="true"
+		>
+		</pie-chart>
+
+		<donut-chart
+			chart-data="myData"
+			id="donutChart"
+			x="name"
+			y="value"
+			show-legend="true"
+		>
+		</donut-chart>
+
+	<div>
+
+	<div ng-app="dataMaker" ng-controller="data2Controller">
+
+		<area-chart
+			chart-data="myData"
+			id="areaChart"
+			x="name"
+			y="value"
+			xlabel="Time"
+			ylabel="Quantity"
+			focus="true"
+		>
+		</area-chart>
+
+		<line-chart
+			chart-data="myData"
+			id="lineChart"
+			x="name"
+			y="value"
+			xlabel="Time"
+			ylabel="Quantity"
+			focus="true"
+		>
+		</line-chart>
+
+	</div>
+
+	<script type="text/javascript">
+
+		var name_data = [
+				{"name": "apple", "value": 10},
+				{"name": "mango", "value": 20},
+				{"name": "jelly", "value": 30},
+				{"name": "jam", "value": 40},
+				{"name": "cats", "value": 50},
+				{"name": "dogs", "value": 60},
+				{"name": "yogurt", "value": 70},
+				{"name": "yam", "value": 80}
+			];
+
+		var date_data = [
+				{"name": "Jan 2000", "value": 10},
+				{"name": "Feb 2001", "value": 20},
+				{"name": "Mar 2002", "value": 30},
+				{"name": "Apr 2003", "value": 40},
+				{"name": "May 2004", "value": 50},
+				{"name": "Jun 2005", "value": 60},
+				{"name": "Jul 2006", "value": 70},
+				{"name": "Aug 2007", "value": 80},
+				{"name": "Sep 2008", "value": 90},
+				{"name": "Oct 2009", "value": 100},
+				{"name": "Nov 2010", "value": 110},
+				{"name": "Dec 2011", "value": 120},
+				{"name": "Dec 2012", "value": 130},
+				{"name": "Nov 2013", "value": 140},
+				{"name": "Oct 2013", "value": 150},
+				{"name": "Sep 2012", "value": 160},
+				{"name": "Aug 2011", "value": 170},
+				{"name": "Jul 2010", "value": 180},
+				{"name": "Jun 2009", "value": 190},
+				{"name": "May 2008", "value": 200},
+				{"name": "Apr 2007", "value": 210},
+				{"name": "Mar 2006", "value": 220},
+				{"name": "Feb 2005", "value": 230},
+				{"name": "Jan 2004", "value": 240},
+				{"name": "Jan 2003", "value": 250},
+				{"name": "Feb 2002", "value": 260}
+			];
+
+		app = angular.module('dataMaker', ['d3ChartDirectives']);
+
+		function dataController($scope) {
+			$scope.myData = name_data;
+		}
+
+		function data2Controller($scope) {
+			$scope.myData = date_data;
+
+			$scope.myData.forEach(function(d){
+				d.name = d3.time.format("%b %Y").parse(d.name);
+			});
+		}
+		
+	</script>
+</body>
+</html>

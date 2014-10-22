@@ -1,0 +1,272 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/d3.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/d3.min.js"></script>
+	<script type="text/javascript" src="js/angulard3.js"></script>
+</head>
+<body>
+	<div ng-app="dataMaker">
+	<div ng-controller="dataController">
+
+		<grouped-horizontal-bar-chart
+			chart-data="myData"
+			id="groupedHBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Quantity"
+			ylabel="Items"
+			show-legend="true"
+		>
+		</grouped-horizontal-bar-chart>
+
+		<grouped-vertical-bar-chart
+			chart-data="myData"
+			id="groupedHBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Quantity"
+			show-legend="true"
+		>
+		</grouped-vertical-bar-chart>
+
+		<stacked-horizontal-bar-chart
+			chart-data="myData"
+			id="stackedHBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Quantity"
+			ylabel="Items"
+			show-legend="true"
+		>
+		</stacked-horizontal-bar-chart>
+
+		<stacked-vertical-bar-chart
+			chart-data="myData"
+			id="stackedVBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Quantity"
+			show-legend="true"
+		>
+		</stacked-vertical-bar-chart>
+
+		<normalized-horizontal-bar-chart
+			chart-data="myData"
+			id="normalizedHBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Quantity"
+			ylabel="Items"
+			show-legend="true"
+		>
+		</normalized-horizontal-bar-chart>
+
+		<normalized-vertical-bar-chart
+			chart-data="myData"
+			id="normalizedVBarChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Quantity"
+			show-legend="true"
+		>
+		</normalized-vertical-bar-chart>
+
+	</div>
+
+	<div ng-controller="data2Controller">
+
+		<stacked-area-chart
+			chart-data="myData"
+			id="stackedAreaChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Time"
+			focus="true"
+			show-legend="true"
+		>
+		</stacked-area-chart>
+
+		<multi-line-chart
+			chart-data="myData"
+			id="multiLineChart"
+			key="names"
+			values="data"
+			x="name"
+			y="value"
+			xlabel="Items"
+			ylabel="Time"
+			focus="true"
+			show-legend="true"
+		>
+		</multi-line-chart>
+		
+	</div>
+
+	<script type="text/javascript">
+
+		name_data = [
+				{
+					"names": "Jane",
+					"data": [
+						{"name": "apple", "value": 10},
+						{"name": "mango", "value": 20},
+						{"name": "jelly", "value": 30},
+						{"name": "jam", "value": 40},
+						{"name": "cats", "value": 50},
+						{"name": "dogs", "value": 60},
+						{"name": "yogurt", "value": 70},
+						{"name": "yam", "value": 80}
+					]
+				}, {
+					"names": "John",
+					"data": [
+						{"name": "apple", "value": 90},
+						{"name": "mango", "value": 100},
+						{"name": "jelly", "value": 100},
+						{"name": "jam", "value": 90},
+						{"name": "cats", "value": 80},
+						{"name": "dogs", "value": 70},
+						{"name": "yogurt", "value": 60},
+						{"name": "yam", "value": 50}
+					]
+				}, {
+					"names": "June",
+					"data": [
+						{"name": "apple", "value": 40},
+						{"name": "mango", "value": 30},
+						{"name": "jelly", "value": 20},
+						{"name": "jam", "value": 10},
+						{"name": "cats", "value": 10},
+						{"name": "dogs", "value": 20},
+						{"name": "yogurt", "value": 30},
+						{"name": "yam", "value": 40}
+					]
+				}, {
+					"names": "Adam",
+					"data": [
+						{"name": "apple", "value": 50},
+						{"name": "mango", "value": 60},
+						{"name": "jelly", "value": 70},
+						{"name": "jam", "value": 80},
+						{"name": "cats", "value": 90},
+						{"name": "dogs", "value": 100},
+						{"name": "yogurt", "value": 100},
+						{"name": "yam", "value": 90}
+					]
+				}, {
+					"names": "Eve",
+					"data": [
+						{"name": "apple", "value": 80},
+						{"name": "mango", "value": 70},
+						{"name": "jelly", "value": 60},
+						{"name": "jam", "value": 50},
+						{"name": "cats", "value": 40},
+						{"name": "dogs", "value": 30},
+						{"name": "yogurt", "value": 20},
+						{"name": "yam", "value": 10}
+					]
+				}
+			];
+
+		date_data = [
+				{
+					"names": "Jane",
+					"data": [
+						{"name": "Jan 2014", "value": 10},
+						{"name": "Jan 2013", "value": 20},
+						{"name": "Jan 2012", "value": 30},
+						{"name": "Jan 2011", "value": 40},
+						{"name": "Jan 2010", "value": 50},
+						{"name": "Jan 2009", "value": 60},
+						{"name": "Jan 2008", "value": 70},
+						{"name": "Jan 2007", "value": 80}
+					]
+				}, {
+					"names": "John",
+					"data": [
+						{"name": "Jan 2014", "value": 90},
+						{"name": "Jan 2013", "value": 100},
+						{"name": "Jan 2012", "value": 100},
+						{"name": "Jan 2011", "value": 90},
+						{"name": "Jan 2010", "value": 80},
+						{"name": "Jan 2009", "value": 70},
+						{"name": "Jan 2008", "value": 60},
+						{"name": "Jan 2007", "value": 50}
+					]
+				}, {
+					"names": "June",
+					"data": [
+						{"name": "Jan 2014", "value": 40},
+						{"name": "Jan 2013", "value": 30},
+						{"name": "Jan 2012", "value": 20},
+						{"name": "Jan 2011", "value": 10},
+						{"name": "Jan 2010", "value": 10},
+						{"name": "Jan 2009", "value": 20},
+						{"name": "Jan 2008", "value": 30},
+						{"name": "Jan 2007", "value": 40}
+					]
+				}, {
+					"names": "Adam",
+					"data": [
+						{"name": "Jan 2014", "value": 50},
+						{"name": "Jan 2013", "value": 60},
+						{"name": "Jan 2012", "value": 70},
+						{"name": "Jan 2011", "value": 80},
+						{"name": "Jan 2010", "value": 90},
+						{"name": "Jan 2009", "value": 100},
+						{"name": "Jan 2008", "value": 100},
+						{"name": "Jan 2007", "value": 90}
+					]
+				}, {
+					"names": "Eve",
+					"data": [
+						{"name": "Jan 2014", "value": 80},
+						{"name": "Jan 2013", "value": 70},
+						{"name": "Jan 2012", "value": 60},
+						{"name": "Jan 2011", "value": 50},
+						{"name": "Jan 2010", "value": 40},
+						{"name": "Jan 2009", "value": 30},
+						{"name": "Jan 2008", "value": 20},
+						{"name": "Jan 2007", "value": 10}
+					]
+				}
+			];
+
+		app = angular.module('dataMaker', ['d3ChartDirectives']);
+
+		function dataController($scope) {
+			$scope.myData = name_data
+		}
+
+		function data2Controller($scope) {
+			$scope.myData = date_data
+
+			$scope.myData.forEach(function(d){
+				d.data.forEach(function(s){
+					s.name = d3.time.format("%b %Y").parse(s.name);
+				});
+			});
+		}
+		
+	</script>
+</body>
+</html>
