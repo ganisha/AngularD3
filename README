@@ -1,0 +1,539 @@
+﻿The angular-d3 directives included in the javascript are:
+
+* Single Series Data:
+	- Vertical Bar Chart
+	- Horizontal Bar Chart
+	- Pie Chart
+	- Donut Chart
+	- Line Chart
+	- Area Chart
+
+* Multi Series Data:
+	- Grouped Vertical Bar Chart
+	- Grouped Horizontal Bar Chart
+	- Stacked Vertical Bar Chart
+	- Stacked Horizontal Bar Chart
+	- Normalized Vertical Bar Chart
+	- Normalized Horizontal Bar Chart
+	- Stacked Area Chart
+	- Multi Line Chart
+
+NOTE: This README is a quick reference for the angular-d3 directives. It contains a very brief explanation on how to use the directives along with a listing of the chart options.
+
+Sample Example
+
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="d3.css">
+
+The d3.css file contains the css for all the charts.
+
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="d3.min.js"></script>
+
+The angular.min.js and the d3.min.js files contain the minified javascripts required for the angular d3 directives.
+
+	<script type="text/javascript" src="angulard3.js"></script>
+
+The angulard3.js file contains the d3 directives.
+
+The following script tag contains data for the d3 charts.
+
+	<script type="text/javascript">
+		var date_data = [
+				{"name": "Jan 2000", "value": 10},
+				{"name": "Feb 2001", "value": 20},
+				{"name": "Mar 2002", "value": 30},
+				{"name": "Apr 2003", "value": 40},
+				{"name": "May 2004", "value": 50},
+				{"name": "Jun 2005", "value": 60},
+				{"name": "Jul 2006", "value": 70},
+				{"name": "Aug 2007", "value": 80},
+				{"name": "Sep 2008", "value": 90},
+				{"name": "Oct 2009", "value": 100},
+				{"name": "Nov 2010", "value": 110},
+				{"name": "Dec 2011", "value": 120},
+				{"name": "Dec 2012", "value": 130},
+				{"name": "Nov 2013", "value": 140},
+				{"name": "Oct 2013", "value": 150},
+				{"name": "Sep 2012", "value": 160},
+				{"name": "Aug 2011", "value": 170},
+				{"name": "Jul 2010", "value": 180},
+				{"name": "Jun 2009", "value": 190},
+				{"name": "May 2008", "value": 200},
+				{"name": "Apr 2007", "value": 210},
+				{"name": "Mar 2006", "value": 220},
+				{"name": "Feb 2005", "value": 230},
+				{"name": "Jan 2004", "value": 240},
+				{"name": "Jan 2003", "value": 250},
+				{"name": "Feb 2002", "value": 260}
+			];
+
+A new angular module with name dataMaker (pick your name here), which uses d3ChartDirectives. Be sure to include the d3ChartDirectives in the array.
+
+		app = angular.module('dataMaker', ['d3ChartDirectives']);
+
+In the following function, the we link the view and the controller using scope. So, we pass the data to $scope.myDataVariable as below.
+
+		function data2Controller($scope) {
+			$scope.myData = date_data;
+
+			$scope.myData.forEach(function(d){
+				d.name = d3.time.format("%b %Y").parse(d.name);
+			});
+		}
+	</script>
+
+</head>
+<body>
+
+Here we call the directive. First, open a div with ng-app the same as the angular module which contains your data script. Pass the function with the scope to the ng-controller.
+
+	<div ng-app="dataMaker" ng-controller="data2Controller">
+
+For drawing the chart, use the chart tag based on the type. Here, it is area chart. The data attribute is necessary. As given below, pass the scope variable which contains the data to the chart-data attribute. Id is necessary as it will tell the directive where to draw the chart. X and y are the names of the x and y variables in data. In the above data, the x values are in the name field and the y values in the value field. That detail is passed below in the x and y atttributes. Xlabel is the label on the x axis and ylabel is the label ion the y axis. Focus is a special option for area and line chart which lets the user focus on a particular stretch on the graph.
+
+		<area-chart
+			chart-data="myData"
+			id="areaChart"
+			x="name"
+			y="value"
+			xlabel="Time"
+			ylabel="Quantity"
+			focus="true"
+		>
+		</area-chart>
+	</div>
+</body>
+</html>
+
+Chart Attribute Details
+
+* Vertical Bar Chart
+
+vertical-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “orange”, “value”: 5},
+{“name”: “apple”, “value”: 50},
+{“name”: “mango”, “value”: 55},
+{“name”: “cherry”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Horizontal Bar Chart
+
+horizontal-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “orange”, “value”: 5},
+{“name”: “apple”, “value”: 50},
+{“name”: “mango”, “value”: 55},
+{“name”: “cherry”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Pie Chart
+
+pie-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “orange”, “value”: 5},
+{“name”: “apple”, “value”: 50},
+{“name”: “mango”, “value”: 55},
+{“name”: “cherry”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Donut Chart
+
+donut-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “orange”, “value”: 5},
+{“name”: “apple”, “value”: 50},
+{“name”: “mango”, “value”: 55},
+{“name”: “cherry”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Line Chart
+
+line-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “Jan 2014”, “value”: 5},
+{“name”: “Jan 2013”, “value”: 50},
+{“name”: “Jan 2012”, “value”: 55},
+{“name”: “Jan 2011”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+focus – This attribute displays a context with brush if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Area Chart
+
+area-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“name”: “Jan 2014”, “value”: 5},
+{“name”: “Jan 2013”, “value”: 50},
+{“name”: “Jan 2012”, “value”: 55},
+{“name”: “Jan 2011”, “value”: 500}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+focus – This attribute displays a context with brush if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Grouped Vertical Bar Chart
+
+grouped-vertical-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Grouped Horizontal Bar Chart
+
+grouped-horizontal-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Stacked Vertical Bar Chart
+
+stacked-vertical-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Stacked Horizontal Bar Chart
+
+stacked-horizontal-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Normalized Vertical Bar Chart
+
+normalized-vertical-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Normalized Horizontal Bar Chart
+
+normalized-horizontal-bar-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “orange”, “value”: 5}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “orange”, “value”: 500}, {“name”: “apple”, “value”: 50}, {“name”: “mango”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 5}, {“name”: “mango”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “orange”, “value”: 50}, {“name”: “apple”, “value”: 500}, {“name”: “mango”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Stacked Area Chart
+
+stacked-area-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “Jan 2014”, “value”: 5}, {“name”: “Jan 2013”, “value”: 50}, {“name”: “Jan 2012”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “Jan 2014”, “value”: 500}, {“name”: “Jan 2013”, “value”: 50}, {“name”: “Jan 2012”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “Jan 2014”, “value”: 50}, {“name”: “Jan 2013”, “value”: 5}, {“name”: “Jan 2012”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “Jan 2014”, “value”: 50}, {“name”: “Jan 2013”, “value”: 500}, {“name”: “Jan 2012”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+* Multi Line Chart
+
+multi-line-chart – This is the call for the directive from the html.
+
+chart-data – The name of the scope variable. In the above case, myData. The JSON structure is as in the following example:
+[
+{“key”: “summer”, “values”: [{“name”: “Jan 2014”, “value”: 5}, {“name”: “Jan 2013”, “value”: 50}, {“name”: “Jan 2012”, “value”: 500}]},
+{“key”: “winter”, “values”: [{“name”: “Jan 2014”, “value”: 500}, {“name”: “Jan 2013”, “value”: 50}, {“name”: “Jan 2012”, “value”: 5}]},
+{“key”: “spring”, “values”: [{“name”: “Jan 2014”, “value”: 50}, {“name”: “Jan 2013”, “value”: 5}, {“name”: “Jan 2012”, “value”: 500}]},
+{“key”: “autumn”, “values”: [{“name”: “Jan 2014”, “value”: 50}, {“name”: “Jan 2013”, “value”: 500}, {“name”: “Jan 2012”, “value”: 5}]}
+]
+
+id – The id is the id of the html directive tag inside which the chart is to be drawn.
+
+key – key is the grouping key in the JSON. So in the chart-data example here, it is key. If the grouping key in the JSON is 'key', this attribute is unnecessary.
+
+values – values is the data collection key in the JSON. So in the chart-data example here, it is values. If the data collection key in the JSON is 'values', this attribute is unnecessary.
+
+x – x is the x key in the JSON. So in the chart-data example here, it is name. If the x key in the JSON is 'x', this attribute is unnecessary.
+
+y - y is the y key in the JSON. So in the chart-data example here, it is value. If the y key in the JSON is 'y', this attribute is unnecessary.
+
+xlabel – x label is the label of the x axis. If this field is not mentioned, then the x axis label will not be displayed.
+
+ylabel – y label is the label of the y axis. If this field is not mentioned, then the y axis label will not be displayed.
+
+showLegend – This attribute displays a legend if set to true.
+
+height – height is the height of the svg. If this field is not mentioned, default height of 500 will be assumed.
+
+width - width is the width of the svg. If this field is not mentioned, default width of 960 will be assumed.
+
+
+--- Thanks For Reading!!! ---
